@@ -1,5 +1,7 @@
 # 🌌 Tanverse Portfolio OS v2.0.0
 
+![Tanverse Portfolio Banner](public/portfolio_banner.png)
+
 A professional, high-end developer portfolio designed as an interactive desktop environment. Built with an editorial aesthetic, dynamic micro-interactions, hardware-accelerated animations, and responsive theme adaptation.
 
 ---
