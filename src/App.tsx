@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react'
-import { HashRouter as Router, Routes, Route, useLocation, Link } from 'react-router-dom'
+import { HashRouter as Router, Routes, Route, useLocation, Link, useNavigate } from 'react-router-dom'
 import { ThemeProvider, useTheme } from './context/ThemeContext'
 import { AudioProvider, useAudio } from './context/AudioContext'
 import { usePortfolioStore } from './store/usePortfolioStore'
@@ -37,7 +37,8 @@ const AppAnalyticsWrapper: React.FC<{ children: React.ReactNode }> = ({ children
   // Track page navigation views
   useEffect(() => {
     let page = location.pathname
-    if (page === '/') page = 'home'
+    if (page === '/') page = 'loader'
+    else if (page === '/home') page = 'home'
     else if (page.startsWith('/projects/')) page = 'project-details'
     else if (page.startsWith('/blog/')) page = 'blog-post'
     
@@ -82,7 +83,7 @@ const NotFoundView: React.FC = () => {
           The requested coordinate memory is either unallocated or has been swept by garbage collections loops.
         </p>
         <Link
-          to="/"
+          to="/home"
           className="inline-flex px-6 py-2.5 rounded-xl bg-gradient-to-r from-red-600 to-rose-500 hover:from-red-500 hover:to-rose-400 text-white font-semibold text-xs transition-all cursor-pointer shadow-md shadow-red-600/10"
         >
           Return to Portal
@@ -326,7 +327,12 @@ const MainPortalView: React.FC = () => {
 
 const AppContent: React.FC = () => {
   useLenis() // Smooth scrolling activation
-  const [loadingComplete, setLoadingComplete] = useState(false)
+  const location = useLocation()
+  const navigate = useNavigate()
+  const fromProject = (location.state as { fromProject?: boolean })?.fromProject
+
+  const isLoaderRoute = location.pathname === '/'
+
   const [targetSection, setTargetSection] = useState<string | null>(null)
   const setActiveSection = usePortfolioStore((state) => state.setActiveSection)
 
@@ -338,21 +344,95 @@ const AppContent: React.FC = () => {
 
   const handleComplete = (target?: string) => {
     const nextTarget = target || 'home'
-    if (nextTarget === 'home') {
-      resetToHeroTop()
-    }
+    sessionStorage.setItem('portfolio_loaded', 'true')
+    navigate('/home') // navigate to portal homepage
     setTargetSection(nextTarget)
-    setLoadingComplete(true)
   }
 
+  // Redirect to loader on first session visit if visiting deep paths directly
+  // Also ensure loader is in the history stack if bypassing the loader
   useEffect(() => {
+    const isLoaded = sessionStorage.getItem('portfolio_loaded') === 'true'
+    const loaderInHistory = sessionStorage.getItem('loader_in_history') === 'true'
+
+    if (!isLoaded && location.pathname !== '/') {
+      navigate('/', { replace: true })
+    } else if (isLoaded && location.pathname !== '/' && !loaderInHistory) {
+      sessionStorage.setItem('loader_in_history', 'true')
+      const currentPath = location.pathname
+      const currentState = location.state
+      navigate('/', { replace: true })
+      navigate(currentPath, { replace: false, state: currentState })
+    } else if (location.pathname === '/') {
+      sessionStorage.setItem('loader_in_history', 'true')
+    }
+  }, [location.pathname, navigate])
+
+  useEffect(() => {
+    const isLoaded = sessionStorage.getItem('portfolio_loaded') === 'true'
     if ('scrollRestoration' in window.history) {
-      window.history.scrollRestoration = 'manual'
+      window.history.scrollRestoration = isLoaded ? 'auto' : 'manual'
     }
   }, [])
 
+  // Scroll to projects section if returning programmatically from project details
+  useEffect(() => {
+    if (location.pathname === '/home' && fromProject) {
+      // Clear location state so refreshes don't scroll again
+      window.history.replaceState({}, document.title)
+      
+      const timer = setTimeout(() => {
+        const el = document.getElementById('projects')
+        if (el) {
+          el.scrollIntoView({ behavior: 'auto' })
+        }
+        setActiveSection('projects')
+      }, 100)
+      return () => clearTimeout(timer)
+    }
+  }, [location.pathname, fromProject, setActiveSection])
+
+  // IntersectionObserver Scroll-Spy to automatically highlight active navbar tab on scroll and on load
+  useEffect(() => {
+    if (location.pathname !== '/home') return
+
+    const sections = ['home', 'about', 'projects', 'experience', 'skills', 'achievements', 'resume', 'contact']
+    
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id)
+        }
+      })
+    }
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-30% 0px -50% 0px', // active when the section occupies the central field of the screen
+      threshold: 0,
+    }
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions)
+
+    // Give DOM a split second to render and Lenis scroll to settle
+    const timer = setTimeout(() => {
+      sections.forEach((id) => {
+        const el = document.getElementById(id)
+        if (el) {
+          observer.observe(el)
+        }
+      })
+    }, 200)
+
+    return () => {
+      clearTimeout(timer)
+      observer.disconnect()
+    }
+  }, [location.pathname, setActiveSection])
+
   useLayoutEffect(() => {
-    if (!loadingComplete || targetSection !== 'home') return
+    if (location.pathname !== '/home' || targetSection !== 'home') return
+    if (fromProject) return // Skip resetting to hero top if coming back from project details
 
     setActiveSection('home')
     resetToHeroTop()
@@ -373,11 +453,11 @@ const AppContent: React.FC = () => {
         window.cancelAnimationFrame(secondFrame)
       }
     }
-  }, [loadingComplete, targetSection, setActiveSection])
+  }, [location.pathname, targetSection, setActiveSection, fromProject])
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout> | null = null;
-    if (loadingComplete && targetSection && targetSection !== 'home') {
+    if (location.pathname === '/home' && targetSection && targetSection !== 'home') {
       timer = setTimeout(() => {
         const el = document.getElementById(targetSection)
         if (el) {
@@ -390,9 +470,9 @@ const AppContent: React.FC = () => {
     return () => {
       if (timer) clearTimeout(timer)
     }
-  }, [loadingComplete, targetSection, setActiveSection])
+  }, [location.pathname, targetSection, setActiveSection])
 
-  if (!loadingComplete) {
+  if (isLoaderRoute) {
     return <LoadingScreen onComplete={handleComplete} />
   }
 
@@ -405,7 +485,7 @@ const AppContent: React.FC = () => {
 
       {/* Routes portal maps */}
       <Routes>
-        <Route path="/" element={<MainPortalView />} />
+        <Route path="/home" element={<MainPortalView />} />
         <Route path="/projects/:id" element={<ProjectDetails />} />
         <Route path="*" element={<NotFoundView />} />
       </Routes>

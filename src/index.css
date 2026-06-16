@@ -199,9 +199,18 @@ span {
   pointer-events: none;
 }
 
-/* Hide cursor default if interactive cursor is active */
+/* Hide cursor default if interactive cursor is active without wildcard layout bottlenecks */
 .custom-cursor-active,
-.custom-cursor-active * {
+.custom-cursor-active a,
+.custom-cursor-active button,
+.custom-cursor-active input,
+.custom-cursor-active select,
+.custom-cursor-active textarea,
+.custom-cursor-active [role="button"],
+.custom-cursor-active [type="button"],
+.custom-cursor-active [type="submit"],
+.custom-cursor-active [type="reset"],
+.custom-cursor-active .cursor-pointer {
   cursor: none !important;
 }
 
@@ -389,7 +398,7 @@ a.btn-tactile:not(.loading-screen-container a):focus-visible {
 
 /* Light Mode Linear Gradient Cover Image Glare Overrides */
 :root[data-theme='light'] [class*="from-[#0a0a0c]"] {
-  background-image: linear-gradient(to top, var(--bg-primary), rgba(230, 227, 216, 0.2) 50%, transparent 100%) !important;
+  display: none !important;
 }
 
 /* Light Mode Input Placeholder Visibility */

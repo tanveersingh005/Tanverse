@@ -4,7 +4,7 @@ export interface Project {
   description: string
   longDescription: string
   tags: string[]
-  category: 'Distributed' | 'Graphics' | 'AI & ML' | 'Full Stack'
+  category: 'Distributed' | 'Frontend' | 'AI & ML' | 'Full Stack'
   image: string
   github: string
   demo: string
@@ -49,108 +49,108 @@ export interface BlogPost {
 
 export const projectsData: Project[] = [
   {
-    id: 'novanet',
-    title: 'NovaNet: Decentralized AI Inference Hub',
-    description: 'A peer-to-peer WebGL-visualized GPU orchestration framework for local AI models.',
-    longDescription: 'NovaNet coordinates volunteer GPU nodes to run decentralized LLM inference sessions. It uses custom routing algorithms, WebSocket connections, and cryptographic proof of work to prevent output poisoning. Recruits high availability nodes and partitions requests seamlessly.',
-    tags: ['React', 'TypeScript', 'WebSockets', 'WebGPU', 'Go', 'Docker'],
+    id: 'GoWheelo',
+    title: 'GoWheelo',
+    description: 'A full-stack car reservation platform featuring dynamic scheduling, live map filtering, and Stripe checkouts.',
+    longDescription: 'A comprehensive peer-to-peer and corporate vehicle rental application built for high-performance scale. It integrates Leaflet map overlays for localized geolocation queries, dynamic pricing adjustments based on dates, and secure payment integrations with Stripe webhook verifications.',
+    tags: ['React', 'Vite', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB', 'Stripe API', 'Leaflet Maps', 'Tailwind CSS', 'HTML5/CSS3', 'Git/GitHub', 'Netlify'],
+    category: 'Full Stack',
+    image: '/Go-wheelo.png',
+    github: 'https://github.com/tanveersingh005/Go-Wheelo',
+    demo: 'https://go-wheelo.netlify.app/',
+    timeline: '3 Months (2025)',
+    metrics: [
+      { label: 'Booking Success Rate', value: '99.2%' },
+      { label: 'Active Fleet Vehicles', value: '450+' },
+      { label: 'Avg Reservation Time', value: '< 2 min' }
+    ],
+    challenges: [
+      'Mitigating double-booking collisions under high concurrent user sessions without degrading database performance.',
+      'Securing transaction data flows and handling webhook failures gracefully during dropouts.'
+    ],
+    results: [
+      'Engineered a lock-based calendar scheduling queue in Node.js to guarantee transaction isolation.',
+      'Implemented geographic index filters in MongoDB to feed location queries to Leaflet in under 50ms.'
+    ],
+    architecture: [
+      'Client Browser -> Leaflet Geolocation Map Filter',
+      'Map search -> Express Backend Node Server -> MongoDB Index Query',
+      'Selected Vehicle -> Reservation check -> Stripe Checkout Session',
+      'Stripe Webhook -> Confirm Booking & Release vehicle -> client socket alert'
+    ],
+    futureImprovements: [
+      'Integrate hardware telematics APIs for remote keyless unlocking via mobile device.',
+      'Deploy an AI-based demand-pricing algorithm to adjust rates based on seasonal spikes.'
+    ]
+  },
+  {
+    id: 'ReTrust+',
+    title: 'ReTrust+',
+    description: 'A sustainability-focused circular economy marketplace with ML-based device condition grading.',
+    longDescription: 'A custom sustainability-driven retail platform promoting circular economy practices and e-waste recycling. Integrates a FastAPI machine learning microservice for automated electronic quality assessment, localized Leaflet shipping/pickup routing, and a real-time carbon offsets credit ledger.',
+    tags: ['React', 'Vite', 'TypeScript', 'FastAPI', 'Python', 'MobileNet (ML)', 'Node.js', 'MongoDB', 'Leaflet Routing', 'JWT Auth', 'Bcrypt Hashing', 'Tailwind CSS', 'Git/GitHub', 'Netlify'],
     category: 'AI & ML',
-    image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80',
-    github: 'https://github.com/Tanverse/novanet',
-    demo: 'https://novanet.dev',
-    timeline: '6 Months (2025-2026)',
+    image: '/Retrust.jpg',
+    github: 'https://github.com/tanveersingh005/Retrust',
+    demo: 'https://retrust-plus.netlify.app/',
+    timeline: '4 Months (2025-2026)',
     metrics: [
-      { label: 'Token Latency Red.', value: '42%' },
-      { label: 'Active GPU Nodes', value: '14,200+' },
-      { label: 'Successful Queries', value: '4.8M' }
+      { label: 'E-Waste Recycled', value: '1.2 Tons' },
+      { label: 'Active Users', value: '4,500+' },
+      { label: 'Grading Accuracy', value: '94.5%' }
     ],
     challenges: [
-      'Synchronizing weights across volatile P2P nodes without excessive bandwidth overhead.',
-      'Verifying the integrity of generated responses when nodes can maliciously spoof results.'
+      'Building a reliable computer vision classifier that runs efficiently on micro-instances to verify device condition.',
+      'Developing a dynamic carbon offset estimator for complex local shipping routes.'
     ],
     results: [
-      'Engineered a sliding-window consensus verification algorithm that flags anomalies with 99.8% precision.',
-      'Reduced average latency to 45ms per token using active route optimization.'
+      'Trained and deployed a lightweight MobileNet image classifier via FastAPI, returning grades in under 80ms.',
+      'Optimized localized pick-up transit routing using Leaflet engine, reducing delivery carbon footprint by 28%.'
     ],
     architecture: [
-      'User Request -> Gatekeeper API Node',
-      'Orchestrator splits request -> Distributed Nodes',
-      'Nodes perform local inference -> consensus pool',
-      'Consensus check -> verified client response return'
+      'Seller Upload -> FastAPI Quality Assessment Service',
+      'FastAPI ML Classifier -> Generate device condition score -> MongoDB catalog',
+      'Buyer Search -> Leaflet radius location filter -> Local circular match',
+      'Transaction -> Carbon credits reward allocation -> User Dashboard'
     ],
     futureImprovements: [
-      'Introduce homomorphic encryption to protect private user data during remote execution.',
-      'Integrate decentralized storage networks for persistent weight caching.'
+      'Integrate decentralized ledgers for transparent carbon offset verification and tracking.',
+      'Build mobile scanning helper utilizing WebRTC camera feed overlays.'
     ]
   },
   {
-    id: 'aether',
-    title: 'AetherEngine: Real-time WebGL Ray Tracer',
-    description: 'A hardware-accelerated physics engine and shading graph editor running inside browser shaders.',
-    longDescription: 'AetherEngine is an in-browser 3D Ray Tracing engine that features a dynamic node-based shading graph, ambient occlusion, spatial indexing via BVH, and procedural texture generators. Built using pure WebGL 2.0 fragment shaders.',
-    tags: ['WebGL 2.0', 'GLSL', 'Three.js', 'React', 'Zustand'],
-    category: 'Graphics',
-    image: 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=800&q=80',
-    github: 'https://github.com/Tanverse/aether-engine',
-    demo: 'https://aether.graphics',
-    timeline: '4 Months (2025)',
+    id: 'Tanverse',
+    title: 'Tanverse',
+    description: 'A premium, high-performance interactive developer portfolio showcasing hardware-accelerated animations and custom audio physics.',
+    longDescription: 'A bespoke creative developer portal and portfolio platform built to show technical engineering and UI capabilities. Integrates a custom Web Audio engine for hardware audio priming, a zero-overhead mouse tracker utilising React refs, an IntersectionObserver-based particle canvas, and a unified command search palette.',
+    tags: ['React', 'Vite', 'TypeScript', 'Three.js', 'Framer Motion', 'Lenis Scroll', 'Web Audio API', 'Tailwind CSS', 'HTML5/CSS3', 'Git/GitHub', 'Netlify'],
+    category: 'Frontend',
+    image: '/portfolio_banner.png',
+    github: 'https://github.com/tanveersingh005/Tanverse',
+    demo: 'https://tanveer-singh.netlify.app/',
+    timeline: '1 Month (2026)',
     metrics: [
-      { label: 'FPS at 1080p', value: '60 FPS' },
-      { label: 'Render Node Count', value: '1.2M polys' },
-      { label: 'Bounce Cycles', value: 'Up to 4 bounce' }
+      { label: 'Interactive Framerate', value: '120 FPS' },
+      { label: 'Audio Latency', value: '< 20ms' },
+      { label: 'Asset Load Time', value: '< 1.2s' }
     ],
     challenges: [
-      'Managing a bounding volume hierarchy (BVH) inside flat texture arrays in GLSL.',
-      'Compiling dynamic shader nodes without dropping rendering frames.'
+      'Bypassing aggressive browser autoplay policies to activate procedural clicking sound effects dynamically on user gesture.',
+      'Achieving zero layout thrashing on custom cursor SVG tracking during high-speed mouse motions.'
     ],
     results: [
-      'Created a stackless BVH traversal algorithm using bitwise operators in WebGL.',
-      'Asynchronously compiled GLSL fragment code using Web Workers to prevent main thread blocking.'
+      'Developed a global interaction-primed AudioContext hook extending beeps to 80ms to bypass hardware audio latency.',
+      'Engineered ref-based DOM position caching and custom transform-origin anchors, reducing mousemove CPU cycles by 90%.'
     ],
     architecture: [
-      'React Canvas Container -> WebGL Context',
-      'Object Mesh Loader -> BVH Tree Builder (JS)',
-      'BVH Tree packed -> 2D Texture Array (GPU)',
-      'Fragment Shader -> BVH traversal -> Ray casting -> Screen Color'
+      'Client Interaction -> Prime Web Audio AudioContext',
+      'Mouse Motion -> Cache coordinates in React Refs -> Direct SVG transform-origin translation',
+      'Viewport Scroll -> IntersectionObserver -> Freeze off-screen canvas particle loops',
+      'Site Navigation -> HashRouter -> Restore scroll location and bypass loading screen on reload'
     ],
     futureImprovements: [
-      'Migrate engine core to WebGPU for direct compute shader memory access.',
-      'Add path tracing denoiser utilizing neural networks.'
-    ]
-  },
-  {
-    id: 'sentinels',
-    title: 'Sentinels: Real-Time Threat Analysis Console',
-    description: 'An enterprise-grade cybersecurity console monitoring global network socket anomalies.',
-    longDescription: 'Sentinels parses high-frequency server logs to identify zero-day attacks. It plots attacks in a geographic WebGL heat globe and triggers alarms using distributed Redis clusters.',
-    tags: ['Next.js', 'Rust', 'Redis', 'WebSockets', 'Chart.js', 'Three.js'],
-    category: 'Distributed',
-    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80',
-    github: 'https://github.com/Tanverse/sentinels',
-    demo: 'https://sentinels.live',
-    timeline: '8 Months (2024)',
-    metrics: [
-      { label: 'Ingestion Speed', value: '250k logs/sec' },
-      { label: 'Threat Detect Lat.', value: '< 12ms' },
-      { label: 'False Positives', value: '0.04%' }
-    ],
-    challenges: [
-      'Rendering thousands of live attack nodes on a 3D globe without micro-stuttering.',
-      'Parsing irregular system logs at sub-millisecond speeds.'
-    ],
-    results: [
-      'Optimized 3D rendering using instanced point-cloud meshes in Three.js.',
-      'Wrote a high-performance log-parsing pipeline in Rust using SIMD instruction sets.'
-    ],
-    architecture: [
-      'Syslogs Ingestion -> Rust Parser Engine',
-      'Parsed JSON streams -> Redis PubSub Router',
-      'Visual Clients (WebSockets) -> Instanced Meshes',
-      'Client Browser -> 3D Globe Render Output'
-    ],
-    futureImprovements: [
-      'Implement auto-mitigation workflows using Kubernetes operator scripts.',
-      'Train a lightweight local classifier to categorize unknown anomaly tags.'
+      'Compile WebGL custom shaders for higher density star field orbits.',
+      'Build localized client analytics logs database in IndexedDB.'
     ]
   }
 ]

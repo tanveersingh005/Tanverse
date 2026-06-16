@@ -77,7 +77,7 @@ export const LeadershipCerts: React.FC = () => {
       organization: 'IIIT Kota',
       period: 'Aug 2024 – Present',
       bullets: [
-        'Liaised between 60+ students and department faculty to streamline academic coordination, resolve administrative queries, and foster peer collaboration.'
+        'Liaised between 250+ students and department faculty to streamline academic coordination, resolve administrative queries, and foster peer collaboration.'
       ],
       icon: <GraduationCap size={18} />
     },

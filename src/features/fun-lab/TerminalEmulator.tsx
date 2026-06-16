@@ -41,7 +41,7 @@ export const TerminalEmulator: React.FC = () => {
         break
       case 'about':
         output = 'BIO LOG:\n' +
-          'A systems architect focused on high-scale backends and WebGL graphics.\n' +
+          'A systems architect focused on high-scale backends and WebGL Graphics.\n' +
           'Bridges structural solidity and visual aesthetics seamlessly.\n' +
           'Located: Delhi, India.\n' +
           'Motto: "Perfect compiles, fluid visuals."'

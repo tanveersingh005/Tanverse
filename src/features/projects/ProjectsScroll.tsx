@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Search, ArrowUpRight, Github } from 'lucide-react'
 import { projectsData } from '../../utils/mockData'
 import { useAudio } from '../../context/AudioContext'
 
-const categories = ['All', 'AI & ML', 'Graphics', 'Distributed']
+const categories = ['All', 'Full Stack & ML', 'Frontend', 'Distributed']
 
 export const ProjectsScroll: React.FC = () => {
   const [search, setSearch] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
   const { playClick } = useAudio()
+  const navigate = useNavigate()
 
   const filteredProjects = projectsData.filter((p) => {
     const matchesSearch =
@@ -93,7 +94,12 @@ export const ProjectsScroll: React.FC = () => {
                 viewport={{ once: true }}
                 whileHover={{ y: -6 }}
                 transition={{ duration: 0.4 }}
-                className="group relative flex flex-col bg-slate-950/20 glassmorphism rounded-2xl border border-white/5 overflow-hidden transition-all duration-300 hover:border-white/15"
+                onClick={() => {
+                  playClick()
+                  navigate(`/projects/${project.id}`)
+                }}
+                className="group relative flex flex-col bg-slate-950/20 glassmorphism rounded-2xl border border-white/5 overflow-hidden transition-all duration-300 hover:border-white/15 cursor-pointer"
+                data-cursor="CASE"
               >
                 {/* Cover Image */}
                 <div className="relative h-48 w-full overflow-hidden bg-slate-900">
@@ -136,7 +142,11 @@ export const ProjectsScroll: React.FC = () => {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-1.5 rounded-full bg-slate-950/60 border border-white/5 text-slate-400 hover:text-slate-100 transition-colors cursor-pointer"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        playClick()
+                      }}
+                      className="p-1.5 rounded-full bg-slate-950/60 border border-white/5 text-slate-400 hover:text-slate-100 transition-colors cursor-pointer relative z-10"
                       title="Explore Source Code"
                       data-cursor="GITHUB"
                     >
@@ -145,8 +155,11 @@ export const ProjectsScroll: React.FC = () => {
 
                     <Link
                       to={`/projects/${project.id}`}
-                      className="flex items-center gap-1.5 text-xs font-semibold text-accent-400 hover:text-accent-300 font-display tracking-wide group/link cursor-pointer"
-                      onClick={() => playClick()}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        playClick()
+                      }}
+                      className="flex items-center gap-1.5 text-xs font-semibold text-accent-400 hover:text-accent-300 font-display tracking-wide group/link cursor-pointer relative z-10"
                       data-cursor="CASE"
                     >
                       Case Study

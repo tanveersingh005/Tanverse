@@ -5,6 +5,73 @@ import { projectsData } from '../../utils/mockData'
 import { usePortfolioStore } from '../../store/usePortfolioStore'
 import { useAudio } from '../../context/AudioContext'
 
+const getTagStyles = (tag: string) => {
+  const t = tag.toLowerCase()
+  
+  // Graphics/UI
+  if (t.includes('react') || t.includes('vite') || t.includes('tailwind') || t.includes('html') || t.includes('css') || t.includes('typescript')) {
+    return {
+      bg: 'bg-cyan-500/5 dark:bg-cyan-500/10 hover:bg-cyan-500/10 dark:hover:bg-cyan-500/20',
+      border: 'border-cyan-500/25 hover:border-cyan-500/50 dark:border-cyan-500/15 dark:hover:border-cyan-500/30',
+      text: 'text-cyan-600 dark:text-cyan-400',
+      dot: 'bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.5)]'
+    }
+  }
+  // Backend/Frameworks
+  if (t.includes('node') || t.includes('express') || t.includes('fastapi') || t.includes('python')) {
+    return {
+      bg: 'bg-emerald-500/5 dark:bg-emerald-500/10 hover:bg-emerald-500/10 dark:hover:bg-emerald-500/20',
+      border: 'border-emerald-500/25 hover:border-emerald-500/50 dark:border-emerald-500/15 dark:hover:border-emerald-500/30',
+      text: 'text-emerald-600 dark:text-emerald-400',
+      dot: 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]'
+    }
+  }
+  // Databases/Storage
+  if (t.includes('mongo') || t.includes('sql') || t.includes('db')) {
+    return {
+      bg: 'bg-amber-500/5 dark:bg-amber-500/10 hover:bg-amber-500/10 dark:hover:bg-amber-500/20',
+      border: 'border-amber-500/25 hover:border-amber-500/50 dark:border-amber-500/15 dark:hover:border-amber-500/30',
+      text: 'text-amber-600 dark:text-amber-400',
+      dot: 'bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.5)]'
+    }
+  }
+  // Devops/Tools
+  if (t.includes('git') || t.includes('github') || t.includes('netlify') || t.includes('render')) {
+    return {
+      bg: 'bg-indigo-500/5 dark:bg-indigo-500/10 hover:bg-indigo-500/10 dark:hover:bg-indigo-500/20',
+      border: 'border-indigo-500/25 hover:border-indigo-500/50 dark:border-indigo-500/15 dark:hover:border-indigo-500/30',
+      text: 'text-indigo-600 dark:text-indigo-400',
+      dot: 'bg-indigo-500 shadow-[0_0_8px_rgba(99,102,241,0.5)]'
+    }
+  }
+  // Security/Auth/APIs
+  if (t.includes('stripe') || t.includes('jwt') || t.includes('bcrypt') || t.includes('auth') || t.includes('hashing')) {
+    return {
+      bg: 'bg-rose-500/5 dark:bg-rose-500/10 hover:bg-rose-500/10 dark:hover:bg-rose-500/20',
+      border: 'border-rose-500/25 hover:border-rose-500/50 dark:border-rose-500/15 dark:hover:border-rose-500/30',
+      text: 'text-rose-600 dark:text-rose-400',
+      dot: 'bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.5)]'
+    }
+  }
+  // Maps/AI/ML
+  if (t.includes('leaflet') || t.includes('map') || t.includes('ml') || t.includes('mobilenet') || t.includes('routing')) {
+    return {
+      bg: 'bg-purple-500/5 dark:bg-purple-500/10 hover:bg-purple-500/10 dark:hover:bg-purple-500/20',
+      border: 'border-purple-500/25 hover:border-purple-500/50 dark:border-purple-500/15 dark:hover:border-purple-500/30',
+      text: 'text-purple-600 dark:text-purple-400',
+      dot: 'bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.5)]'
+    }
+  }
+  
+  // Default Generic
+  return {
+    bg: 'bg-slate-500/5 dark:bg-slate-500/10 hover:bg-slate-500/10 dark:hover:bg-slate-500/20',
+    border: 'border-slate-500/25 hover:border-slate-500/50 dark:border-slate-500/15 dark:hover:border-slate-500/30',
+    text: 'text-slate-600 dark:text-slate-400',
+    dot: 'bg-slate-500 shadow-[0_0_8px_rgba(100,116,139,0.5)]'
+  }
+}
+
 export const ProjectDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
@@ -27,14 +94,14 @@ export const ProjectDetails: React.FC = () => {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-[#0a0a0c] text-center px-6">
         <h2 className="text-xl font-bold font-display text-slate-200 mb-4">Project Core Not Resolved</h2>
-        <Link to="/" className="text-xs text-accent-400 hover:underline">Return to Home Portal</Link>
+        <Link to="/home" className="text-xs text-accent-400 hover:underline">Return to Home Portal</Link>
       </div>
     )
   }
 
   const handleBack = () => {
     playClick()
-    navigate('/')
+    navigate('/home', { state: { fromProject: true } })
   }
 
   return (
@@ -59,15 +126,19 @@ export const ProjectDetails: React.FC = () => {
             <h1 className="text-2xl md:text-4xl font-extrabold tracking-tight text-slate-100 font-display mt-2 mb-4 leading-tight">
               {project.title}
             </h1>
-            <div className="flex flex-wrap gap-1.5">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-2.5 py-1 rounded bg-slate-950/65 border border-white/5 text-3xs font-medium text-slate-400"
-                >
-                  {tag}
-                </span>
-              ))}
+            <div className="flex flex-wrap gap-2">
+              {project.tags.map((tag) => {
+                const styles = getTagStyles(tag)
+                return (
+                  <span
+                    key={tag}
+                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-3xs font-medium ${styles.bg} ${styles.border} ${styles.text} transition-all duration-300 hover:-translate-y-0.5 shadow-sm hover:shadow-md cursor-default`}
+                  >
+                    <span className={`w-1.5 h-1.5 rounded-full ${styles.dot}`} />
+                    {tag}
+                  </span>
+                )
+              })}
             </div>
           </div>
 
@@ -96,8 +167,8 @@ export const ProjectDetails: React.FC = () => {
         </div>
 
         {/* Project Cover Image */}
-        <div className="h-64 md:h-[400px] w-full rounded-3xl overflow-hidden mb-12 shadow-2xl border border-white/5 bg-slate-900">
-          <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+        <div className="w-full rounded-3xl overflow-hidden mb-12 shadow-2xl border border-white/5 bg-transparent">
+          <img src={project.image} alt={project.title} className="w-full h-auto block" />
         </div>
 
         {/* Grid specifications */}

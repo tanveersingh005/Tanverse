@@ -54,9 +54,11 @@ export const CanvasBackground: React.FC = () => {
         // Mouse repelling physics
         const dx = mouse.x - this.x
         const dy = mouse.y - this.y
-        const dist = Math.sqrt(dx * dx + dy * dy)
+        const distSq = dx * dx + dy * dy
+        const radiusSq = mouse.radius * mouse.radius
         
-        if (dist < mouse.radius) {
+        if (distSq < radiusSq) {
+          const dist = Math.sqrt(distSq)
           const force = (mouse.radius - dist) / mouse.radius
           const angle = Math.atan2(dy, dx)
           this.x -= Math.cos(angle) * force * 1.2
@@ -92,14 +94,16 @@ export const CanvasBackground: React.FC = () => {
     // Connect particles in proximity
     const drawConnections = () => {
       if (!ctx) return
+      const connDistanceSq = connectionDistance * connectionDistance
       
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x
           const dy = particles[i].y - particles[j].y
-          const dist = Math.sqrt(dx * dx + dy * dy)
+          const distSq = dx * dx + dy * dy
 
-          if (dist < connectionDistance) {
+          if (distSq < connDistanceSq) {
+            const dist = Math.sqrt(distSq)
             const alpha = (1 - dist / connectionDistance) * 0.10
             ctx.beginPath()
             ctx.moveTo(particles[i].x, particles[i].y)

@@ -135,7 +135,7 @@ export const GalaxyOrbitSkills: React.FC = () => {
         { name: 'Figma', level: 'Expert', percentage: 95, desc: 'Creating vector prototypes, visual wireframes, component design systems, and developer handoffs.', color: '#F24E1E' },
         { name: 'Canva', level: 'Expert', percentage: 99, desc: 'Formulating quick layouts, social graphic visual assets, presentation slides, and visuals.', color: '#00C4CC' },
         { name: 'Agentic AI', level: 'Advanced', percentage: 70, desc: 'Building automated tools loop systems, autonomous action cycles, and agent frameworks.', color: '#8B5CF6' },
-        { name: 'Photoshop', level: 'Advanced', percentage: 85, desc: 'Visual graphics raster manipulation, photo color-grading, asset exporting, and layouts.', color: '#31A8FF' },
+        { name: 'Photoshop', level: 'Advanced', percentage: 85, desc: 'Visual Graphics raster manipulation, photo color-grading, asset exporting, and layouts.', color: '#31A8FF' },
         { name: 'Google Stitch', level: 'Advanced', percentage: 89, desc: 'Orchestrating workflows, visual pipelines, and cloud platform integrations.', color: '#4285F4' }
       ]
     },

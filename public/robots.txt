@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://Tanverse.graphics/sitemap.xml
+Sitemap: https://Tanverse.Graphics/sitemap.xml

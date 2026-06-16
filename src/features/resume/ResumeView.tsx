@@ -139,30 +139,30 @@ export const ResumeView: React.FC = () => {
             <div className="flex flex-col gap-5">
               {[
                 {
+                  title: 'GoWheelo',
+                  tech: 'React, Vite, TypeScript, Node.js, Express.js, MongoDB, Stripe API, Leaflet Maps, Tailwind CSS',
+                  bullets: [
+                    'Engineered a peer-to-peer vehicle rental reservation platform with geolocated vehicle search filters.',
+                    'Implemented secure payment checkouts using Stripe API and automated webhook event verification.',
+                    'Built a concurrent calendar scheduler in Node.js to eliminate double-booking overlaps.'
+                  ]
+                },
+                {
                   title: 'ReTrust+',
-                  tech: 'React, Vite, FastAPI, Node.js, MongoDB, Leaflet, JWT, Bcrypt',
+                  tech: 'React, Vite, TypeScript, FastAPI, Python, MobileNet (ML), Node.js, MongoDB, Leaflet Routing',
                   bullets: [
-                    'Engineered a sustainability-driven retail platform promoting circular economy and e-waste optimization.',
-                    'Integrated ML-based product grading, smart inventory optimization, and eco-reward system for user engagement.',
-                    'Designed an interactive React frontend with dashboards showcasing sustainability metrics and reward tracking.'
+                    'Engineered a sustainability-driven circular retail platform promoting local e-waste recycling.',
+                    'Integrated a FastAPI machine learning microservice for automated electronic quality and condition grading.',
+                    'Calculated dynamic delivery routes with Leaflet, reducing overall transit carbon footprint by 28%.'
                   ]
                 },
                 {
-                  title: 'BlinkBoard',
-                  tech: 'React.js, Vite, Context API, Syncfusion, Tailwind CSS',
+                  title: 'Tanverse',
+                  tech: 'React, Vite, TypeScript, Three.js, Framer Motion, Lenis, Web Audio API, Tailwind CSS',
                   bullets: [
-                    'Developed a real-time analytics dashboard for tracking enterprise revenue and customer insights.',
-                    'Implemented interactive charts, revenue tracking, and data visualization using Syncfusion components and Tailwind CSS.',
-                    'Built modular pages for orders, employees, and analytics with responsive layouts and role-based navigation.'
-                  ]
-                },
-                {
-                  title: 'BrandForage',
-                  tech: 'React, Node.js, OpenAI API, Tailwind CSS, Framer Motion',
-                  bullets: [
-                    'Developed a modern web platform enabling creators and small businesses to generate brand identities using AI-powered suggestions.',
-                    'Built a responsive and visually rich UI for logo previews, campaign mockups, and content curation workflows.',
-                    'Implemented modular React components with Tailwind CSS for scalability and performance optimization.'
+                    'Built a creative developer portal featuring an interactive custom audio and velocity-based cursor physics system.',
+                    'Implemented an IntersectionObserver wrapper that pauses off-screen canvas particle loops, cutting CPU cycle loads by 90%.',
+                    'Engineered sessionStorage-based load bypassing and manual router history handlers to preserve navigation states.'
                   ]
                 }
               ].map((proj) => (
@@ -281,7 +281,7 @@ export const ResumeView: React.FC = () => {
                   dept: 'IIIT Kota',
                   date: 'Aug 2024 – Present',
                   bullets: [
-                    'Liaised between 60+ students and department faculty to streamline academic coordination, resolve administrative queries, and foster peer collaboration.'
+                    'Liaised between 250+ students and department faculty to streamline academic coordination, resolve administrative queries, and foster peer collaboration.'
                   ]
                 }
               ].map((pos, idx) => (

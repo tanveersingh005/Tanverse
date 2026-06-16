@@ -107,12 +107,12 @@ export const CustomCursor: React.FC = () => {
       // 3. Direct DOM styling (no React state trigger)
       if (mainElementRef.current) {
         const scale = isClicking ? 0.75 : 1
-        mainElementRef.current.style.transform = `translate3d(calc(${mainPos.current.x}px - 50%), calc(${mainPos.current.y}px - 50%), 0) scale(${scale}) rotate(${rotation.current}deg)`
+        mainElementRef.current.style.transform = `translate3d(${mainPos.current.x}px, ${mainPos.current.y}px, 0) scale(${scale}) rotate(${rotation.current}deg)`
       }
       
       if (trailElementRef.current) {
         const scale = isHovered ? 1.4 : 1.1
-        trailElementRef.current.style.transform = `translate3d(calc(${trailPos.current.x}px - 50%), calc(${trailPos.current.y}px - 50%), 0) scale(${scale}) rotate(${rotation.current * 0.8}deg)`
+        trailElementRef.current.style.transform = `translate3d(${trailPos.current.x}px, ${trailPos.current.y}px, 0) scale(${scale}) rotate(${rotation.current * 0.8}deg)`
       }
       
       animId = requestAnimationFrame(updateTrail)
@@ -126,9 +126,8 @@ export const CustomCursor: React.FC = () => {
 
   const isDark = resolvedTheme === 'dark'
 
-  const defaultArrowPath = "M4 2 L18 7 L12 9 L10 16 Z"
-  const hoverArrowPath = "M10 20 L13 12 L22 15 L16 16 Z"
-  const activePath = isHovered ? hoverArrowPath : defaultArrowPath
+  const defaultArrowPath = "M0 0 L14 5 L8 7 L6 14 Z"
+  const activePath = defaultArrowPath
 
   const mainFill = isHovered 
     ? 'var(--accent-500, #a855f7)' 
@@ -154,6 +153,7 @@ export const CustomCursor: React.FC = () => {
           width: '32px',
           height: '32px',
           opacity: isVisible ? 1 : 0,
+          transformOrigin: '0 0',
         }}
       >
         <svg
@@ -188,6 +188,7 @@ export const CustomCursor: React.FC = () => {
           width: '32px',
           height: '32px',
           opacity: isVisible ? 1 : 0,
+          transformOrigin: '0 0',
         }}
       >
         <svg width="32" height="32" viewBox="0 0 24 24">
