@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import { ArrowLeft, Github, Globe, Calendar, Clock, BarChart2, ShieldAlert, Award } from 'lucide-react'
+import { ArrowLeft, Github, Globe, Calendar, Clock, BarChart2, ShieldAlert, Award, Puzzle } from 'lucide-react'
 import { projectsData } from '../../utils/mockData'
 import { usePortfolioStore } from '../../store/usePortfolioStore'
 import { useAudio } from '../../context/AudioContext'
@@ -153,16 +153,22 @@ export const ProjectDetails: React.FC = () => {
             >
               <Github size={14} /> Repository
             </a>
-            <a
-              href={project.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => playSuccess()}
-              className="flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-accent-600 to-accent-400 hover:from-accent-500 hover:to-accent-300 shadow-md shadow-accent-600/10 transition-colors cursor-pointer"
-              data-cursor="LIVE"
-            >
-              <Globe size={14} /> Live Demo
-            </a>
+            {project.demo ? (
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => playSuccess()}
+                className="flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-accent-600 to-accent-400 hover:from-accent-500 hover:to-accent-300 shadow-md shadow-accent-600/10 transition-colors cursor-pointer"
+                data-cursor="LIVE"
+              >
+                <Globe size={14} /> Live Demo
+              </a>
+            ) : (
+              <div className="flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-semibold text-violet-300 bg-violet-900/20 border border-violet-500/30">
+                <Puzzle size={14} /> Browser Extension
+              </div>
+            )}
           </div>
         </div>
 

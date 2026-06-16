@@ -4,7 +4,7 @@ export interface Project {
   description: string
   longDescription: string
   tags: string[]
-  category: 'Distributed' | 'Frontend' | 'AI & ML' | 'Full Stack'
+  category: 'Distributed' | 'Frontend' | 'AI & ML' | 'Full Stack' | 'Frontend & AI' | 'Full Stack & AI/ML' | 'Extension'
   image: string
   github: string
   demo: string
@@ -84,12 +84,47 @@ export const projectsData: Project[] = [
     ]
   },
   {
+    id: 'CredNova',
+    title: 'CredNova',
+    description: 'An enterprise-grade AI-powered loan decisioning & credit risk analytics platform with explainable LangGraph agentic workflows.',
+    longDescription: 'An advanced financial technology platform designed to automate loan applications, evaluate credit default risk using TensorFlow Deep Learning models, explain loan decisions via LangGraph agentic workflows (Llama-3.3 on Groq), and audit demographic fairness across protected variables (age, marital status, and education).',
+    tags: ['Deep Learning', 'Large Language Models (LLM)', 'LangGraph', 'TensorFlow', 'Node.js', 'React.js', 'Redux tool kit', 'Docker', 'MongoDB', 'REST APIs', 'Microservices', 'GreenSock Animation Platform (GSAP)', 'Tailwind CSS'],
+    category: 'Full Stack & AI/ML',
+    image: 'https://raw.githubusercontent.com/Dev-Verma-bot/TechNovA_/main/image/crednova_hero.png',
+    github: 'https://github.com/Dev-Verma-bot/TechNovA_',
+    demo: 'https://cred-nova.netlify.app/',
+    timeline: '3 Months (2025-2026)',
+    metrics: [
+      { label: 'Risk Model Accuracy', value: '96.8%' },
+      { label: 'Explainability Inference', value: '< 1.8s' },
+      { label: 'Avg Underwriting Time', value: '< 3s' }
+    ],
+    challenges: [
+      'Translating multi-dimensional neural network weights and probability outputs into plain-language financial reasoning for applicants.',
+      'Auditing historical lending datasets to ensure demographic parity and equal opportunity metrics remain fair.'
+    ],
+    results: [
+      'Designed a 4-Node LangGraph State Graph (rejection analyzer, improvements generator, risk classifier, final formatter) powered by Llama-3.3.',
+      'Built an interactive what-if simulator and fairness console tracking selection rate ratios for protected attributes.'
+    ],
+    architecture: [
+      'Client Portal -> React 19 Frontend (Redux Toolkit) -> Express Gateway',
+      'Application Form -> Express Server -> MongoDB Atlas / Mongoose Schema',
+      'Risk Analysis -> Flask Python Microservice -> TensorFlow ANN Risk Evaluator (.h5)',
+      'Agentic Explanation -> LangGraph Decision Workflow -> Llama-3.3 (Groq API)'
+    ],
+    futureImprovements: [
+      'Implement SHAP value mapping overlays to supplement LLM justifications with mathematical feature importance scores.',
+      'Deploy real-time drift alarms monitoring shift metrics in population stability index (PSI).'
+    ]
+  },
+  {
     id: 'ReTrust+',
     title: 'ReTrust+',
     description: 'A sustainability-focused circular economy marketplace with ML-based device condition grading.',
     longDescription: 'A custom sustainability-driven retail platform promoting circular economy practices and e-waste recycling. Integrates a FastAPI machine learning microservice for automated electronic quality assessment, localized Leaflet shipping/pickup routing, and a real-time carbon offsets credit ledger.',
     tags: ['React', 'Vite', 'TypeScript', 'FastAPI', 'Python', 'MobileNet (ML)', 'Node.js', 'MongoDB', 'Leaflet Routing', 'JWT Auth', 'Bcrypt Hashing', 'Tailwind CSS', 'Git/GitHub', 'Netlify'],
-    category: 'AI & ML',
+    category: 'Full Stack & AI/ML',
     image: '/Retrust.jpg',
     github: 'https://github.com/tanveersingh005/Retrust',
     demo: 'https://retrust-plus.netlify.app/',
@@ -151,6 +186,146 @@ export const projectsData: Project[] = [
     futureImprovements: [
       'Compile WebGL custom shaders for higher density star field orbits.',
       'Build localized client analytics logs database in IndexedDB.'
+    ]
+  },
+  {
+    id: 'QuickGist',
+    title: 'QuickGist',
+    description: 'A Chrome browser extension that uses AI to instantly summarize any web page and save key insights directly to GitHub Gists.',
+    longDescription: 'QuickGist is a powerful Chrome browser extension designed to eliminate information overload. With a single click, it extracts and cleans the full text of any active web page, sends it through an OpenAI-powered summarization pipeline, and presents a structured bullet-point digest right inside the browser popup. Users can then export these AI-generated summaries as GitHub Gists for permanent storage and easy sharing — all without leaving their current tab. The extension uses PKCE OAuth 2.0 flows for secure GitHub authentication, a custom chunked text parser to handle long-form articles without hitting LLM token limits, and a lightweight Express proxy to keep API secrets off the client.',
+    tags: ['Chrome Extension', 'JavaScript', 'OpenAI API', 'GitHub Gists API', 'OAuth 2.0 PKCE', 'Node.js', 'Express.js', 'Manifest V3', 'HTML5/CSS3', 'Git/GitHub'],
+    category: 'Extension',
+    image: '/quick_gist.png',
+    github: 'https://github.com/tanveersingh005/QuickGist',
+    demo: '',
+    timeline: '2 Months (2025)',
+    metrics: [
+      { label: 'Gists Exported', value: '1,500+' },
+      { label: 'Summarization Time', value: '< 2.5s' },
+      { label: 'Pages Summarized', value: '5,000+' }
+    ],
+    challenges: [
+      'Extracting clean readable text from wildly inconsistent HTML structures across thousands of different websites while stripping ads, navbars, and boilerplate content.',
+      'Keeping OpenAI API secrets secure in a client-side browser extension environment without exposing tokens to the end user.'
+    ],
+    results: [
+      'Built a DOM traversal content extractor using TreeWalker API that strips non-semantic nodes, achieving clean text extraction across 95%+ of tested sites.',
+      'Implemented a secure Express proxy server handling all OpenAI and GitHub API calls server-side, with PKCE OAuth flows ensuring zero token exposure in the extension bundle.'
+    ],
+    architecture: [
+      'User clicks extension icon -> Popup UI activates in Chrome toolbar',
+      'Content Script -> Extracts & cleans active tab page text via DOM traversal',
+      'Cleaned text -> Express Proxy Server -> OpenAI Chat Completions API',
+      'AI Summary -> Popup renders bullet digest -> Save to GitHub Gist via OAuth'
+    ],
+    futureImprovements: [
+      'Add highlight-to-summarize mode so users can select specific paragraphs for focused digests.',
+      'Build a history panel inside the popup showing all previously saved Gists with search and tagging.'
+    ]
+  },
+  {
+    id: 'Finora',
+    title: 'Finora',
+    description: 'A developer-focused digital banking sandbox highlighting dynamic financial charts and micro-UI parameter controls.',
+    longDescription: 'A custom finance sandbox and transaction playground designed to demonstrate fluid UI interactions, custom cursor magnet physics, and dynamic financial calculations. Provides multi-account simulation, dynamic parameter control switches, and real-time Chart.js interactive reports.',
+    tags: ['React', 'TypeScript', 'Chart.js', 'Tailwind CSS', 'Framer Motion', 'Vite', 'HTML5/CSS3', 'Git/GitHub', 'Netlify'],
+    category: 'Frontend',
+    image: '/finora.png',
+    github: 'https://github.com/tanveersingh005/Finora',
+    demo: 'https://fin-ora.netlify.app/',
+    timeline: '2 Months (2025)',
+    metrics: [
+      { label: 'Render Latency', value: '< 15ms' },
+      { label: 'Interactive Widgets', value: '12+' },
+      { label: 'State Sync Time', value: '< 5ms' }
+    ],
+    challenges: [
+      'Designing custom physical magnetic cursors that follow state updates without generating layout thrash.',
+      'Maintaining precise double-entry ledger math when updating mock variables in sandbox accounts.'
+    ],
+    results: [
+      'Created custom React hook listeners tracking mouse velocities to adjust SVG elastic cursor dimensions.',
+      'Implemented transactional state reducers guaranteeing audit balances match after deposit/transfer simulations.'
+    ],
+    architecture: [
+      'Interactive Dashboard -> React State Engine',
+      'User Switch -> Trigger dynamic financial formulas -> Recalculate transaction tables',
+      'Sandbox Ledgers -> Chart.js API -> Redraw graphical balance paths',
+      'Cursor coordinates -> Magnet Hook -> Direct SVG transform translation'
+    ],
+    futureImprovements: [
+      'Integrate Plaid Sandbox links to pull realistic mock transactions from external banks.',
+      'Deploy responsive financial projection models utilizing simple regression tools.'
+    ]
+  },
+  {
+    id: 'BrandForage-AI',
+    title: 'BrandForage-AI',
+    description: 'A stunning AI-powered SaaS branding platform that generates identities, color palettes, and logo previews.',
+    longDescription: 'An interactive generative AI design helper for branding agencies. BrandForage-AI generates color palettes, design assets, and brand slogans based on agency descriptions, utilizing OpenAI APIs. Includes interactive preview grids showing glassmorphic branding cards and mockups.',
+    tags: ['React', 'TypeScript', 'Node.js', 'OpenAI API', 'Framer Motion', 'Tailwind CSS', 'Vite', 'Git/GitHub', 'Netlify'],
+    category: 'Frontend & AI',
+    image: '/brandforage_ai.png',
+    github: 'https://github.com/tanveersingh005/BrandForage-AI',
+    demo: 'https://brandforage.netlify.app/',
+    timeline: '3 Months (2026)',
+    metrics: [
+      { label: 'Generation Speed', value: '< 1.5s' },
+      { label: 'Asset Combinations', value: '10,000+' },
+      { label: 'User Rating', value: '4.9/5' }
+    ],
+    challenges: [
+      'Structuring generative prompts to produce harmonious, contrast-compliant brand colors and high-contrast styling tokens.',
+      'Enabling smooth UI state transitions during heavy multi-image loading sequences.'
+    ],
+    results: [
+      'Developed a color parsing engine that extracts hex values from structured LLM outputs and tests their accessibility contrast ratios.',
+      'Utilized Framer Motion layout animations to gracefully slide mock preview cards as new styles load.'
+    ],
+    architecture: [
+      'Input Prompt -> React App -> Express Server API',
+      'Express Server -> OpenAI Structured JSON outputs -> Brand styles & copy',
+      'Brand palette -> Contrast Checker -> Render custom CSS themes',
+      'Dynamic components -> Preview frames -> User download mockup bundle'
+    ],
+    futureImprovements: [
+      'Deploy vector logo modifiers based on SVG path editor widgets.',
+      'Generate custom branding landing page templates automatically using AI layout generators.'
+    ]
+  },
+  {
+    id: 'BlinkBoard',
+    title: 'BlinkBoard',
+    description: 'An enterprise sales dashboard showcasing complex interactive charts and role-based workspace layouts.',
+    longDescription: 'A premium management information portal designed to visualize enterprise financial statistics. It features complex analytics charts, real-time KPI card boards, data tables, and dynamic routing permissions based on role settings.',
+    tags: ['React', 'Vite', 'TypeScript', 'Syncfusion', 'Tailwind CSS', 'Context API', 'Git/GitHub', 'Netlify'],
+    category: 'Frontend',
+    image: '/blinkboard.png',
+    github: 'https://github.com/tanveersingh005/BlinkBoard',
+    demo: 'https://blinkboard.netlify.app/',
+    timeline: '2 Months (2025)',
+    metrics: [
+      { label: 'Chart Render Latency', value: '< 30ms' },
+      { label: 'Data Points Plotted', value: '50,000+' },
+      { label: 'Role Types Supported', value: '4' }
+    ],
+    challenges: [
+      'Optimizing rendering cycles when plotting dense transactional timeseries charts on responsive screen layouts.',
+      'Synchronizing multi-panel layouts when toggling sidebar contexts and user scopes.'
+    ],
+    results: [
+      'Integrated Syncfusion React charts with memoized data handlers, ensuring redraws only happen on date filter changes.',
+      'Designed a global React Context manager coordinating navigation states across split sidebars and main screens.'
+    ],
+    architecture: [
+      'Client Browser -> Role Router Guardian (React Router)',
+      'Sales Metrics -> React Context State -> Memoized Data Filters',
+      'Filtered Datasets -> Syncfusion Charts -> Render Canvas layout grids',
+      'Dashboard Widgets -> Flex layout -> Dynamic breakpoint scaling'
+    ],
+    futureImprovements: [
+      'Integrate WebSockets to push live sales feeds directly from mock payment systems.',
+      'Implement custom drag-and-drop dashboard designer using React Grid Layout.'
     ]
   }
 ]

@@ -19,9 +19,35 @@ export const ProjectsScroll: React.FC = () => {
       p.description.toLowerCase().includes(search.toLowerCase()) ||
       p.tags.some((t) => t.toLowerCase().includes(search.toLowerCase()))
       
-    const matchesCat = selectedCategory === 'All' || p.category === selectedCategory
+    const matchesCat =
+      selectedCategory === 'All' ||
+      p.category === selectedCategory ||
+      (selectedCategory === 'Full Stack & ML' &&
+        (p.category.includes('Full Stack') || p.category.includes('AI') || p.category.includes('ML')))
+        
     return matchesSearch && matchesCat
   })
+
+  const getGridClasses = (index: number, total: number) => {
+    let classes = "col-span-1"
+    
+    // On lg screens, we use a 6-column grid where each item spans 2 columns (equates to 3 columns)
+    classes += " lg:col-span-2"
+    
+    if (total === 8) {
+      if (index === 6) classes += " lg:col-start-2"
+    } else if (total === 7) {
+      if (index === 6) classes += " lg:col-start-3"
+    } else if (total === 5) {
+      if (index === 3) classes += " lg:col-start-2"
+    } else if (total === 2) {
+      if (index === 0) classes += " lg:col-start-2"
+    } else if (total === 1) {
+      classes += " lg:col-start-3"
+    }
+    
+    return classes
+  }
 
   const handleSelectCat = (cat: string) => {
     playClick()
@@ -41,7 +67,7 @@ export const ProjectsScroll: React.FC = () => {
               05 &bull; Works
             </span>
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-100 font-display mt-2">
-              Featured Case Studies
+              Featured Projects
             </h2>
             <div className="h-0.5 w-12 bg-accent-500 mt-4 mx-auto md:mx-0 rounded-full" />
           </div>
@@ -84,9 +110,9 @@ export const ProjectsScroll: React.FC = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
           {filteredProjects.length > 0 ? (
-            filteredProjects.map((project) => (
+            filteredProjects.map((project, index) => (
               <motion.div
                 key={project.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -98,7 +124,7 @@ export const ProjectsScroll: React.FC = () => {
                   playClick()
                   navigate(`/projects/${project.id}`)
                 }}
-                className="group relative flex flex-col bg-slate-950/20 glassmorphism rounded-2xl border border-white/5 overflow-hidden transition-all duration-300 hover:border-white/15 cursor-pointer"
+                className={`group relative flex flex-col bg-slate-950/20 glassmorphism rounded-2xl border border-white/5 overflow-hidden transition-all duration-300 hover:border-white/15 cursor-pointer ${getGridClasses(index, filteredProjects.length)}`}
                 data-cursor="CASE"
               >
                 {/* Cover Image */}

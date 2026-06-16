@@ -148,6 +148,15 @@ export const ResumeView: React.FC = () => {
                   ]
                 },
                 {
+                  title: 'CredNova',
+                  tech: 'React, Redux, Node.js, Express, MongoDB, Flask, TensorFlow, LangGraph, LLM (Groq), Docker, GSAP',
+                  bullets: [
+                    'Automated application workflows, evaluating credit default risk using TensorFlow Deep Learning models.',
+                    'Engineered explainable decision reasoning utilizing LangGraph agentic graphs and Llama-3.3 on Groq.',
+                    'Integrated an interactive what-if simulator and audited demographic fairness metrics across protected user variables.'
+                  ]
+                },
+                {
                   title: 'ReTrust+',
                   tech: 'React, Vite, TypeScript, FastAPI, Python, MobileNet (ML), Node.js, MongoDB, Leaflet Routing',
                   bullets: [
@@ -163,6 +172,42 @@ export const ResumeView: React.FC = () => {
                     'Built a creative developer portal featuring an interactive custom audio and velocity-based cursor physics system.',
                     'Implemented an IntersectionObserver wrapper that pauses off-screen canvas particle loops, cutting CPU cycle loads by 90%.',
                     'Engineered sessionStorage-based load bypassing and manual router history handlers to preserve navigation states.'
+                  ]
+                },
+                {
+                  title: 'QuickGist',
+                  tech: 'React, Vite, TypeScript, Node.js, Express.js, GitHub API, OpenAI API, Tailwind CSS',
+                  bullets: [
+                    'Built an AI-powered article summarizer that extracts key takeaways and stores them as GitHub Gists.',
+                    'Developed a secure OAuth 2.0 PKCE client flow handling token exchanges and credentials.',
+                    'Optimized token rate-limits and text-chunking algorithms for seamless OpenAI API completions.'
+                  ]
+                },
+                {
+                  title: 'Finora',
+                  tech: 'React, TypeScript, Chart.js, Tailwind CSS, Framer Motion, Vite',
+                  bullets: [
+                    'Created an interactive finance sandbox to simulate transactions and audit account double-entry ledgers.',
+                    'Built a fluid dynamic cursor tracking physics hook to display visual mouse-state indicators.',
+                    'Integrated multi-account ledger visualization tables using dynamic Chart.js canvas elements.'
+                  ]
+                },
+                {
+                  title: 'BrandForage-AI',
+                  tech: 'React, TypeScript, Node.js, OpenAI API, Framer Motion, Tailwind CSS',
+                  bullets: [
+                    'Engineered a SaaS generative AI branding tool to generate accessible color schemes and logo cards.',
+                    'Implemented automatic contrast checking algorithm for contrast-compliance validation on hex colors.',
+                    'Utilized Framer Motion custom layout triggers to transition preview mockups gracefully.'
+                  ]
+                },
+                {
+                  title: 'BlinkBoard',
+                  tech: 'React, Vite, TypeScript, Syncfusion, Tailwind CSS, Context API',
+                  bullets: [
+                    'Designed a premium sales administration dashboard mapping complex transactional graphics.',
+                    'Integrated enterprise charts via Syncfusion, reducing data plotting rendering latency to under 30ms.',
+                    'Engineered a global React Context layout manager to coordinate routing and permissions.'
                   ]
                 }
               ].map((proj) => (
