@@ -1,5 +1,5 @@
 import React from 'react'
-import { Download, Printer, GraduationCap, Award, Languages, Globe } from 'lucide-react'
+import { Download, Printer } from 'lucide-react'
 import { useAudio } from '../../context/AudioContext'
 
 export const ResumeView: React.FC = () => {

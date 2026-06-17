@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useRef } from 'react'
+import React, { createContext, useContext, useEffect } from 'react'
 import { usePortfolioStore } from '../store/usePortfolioStore'
 
 interface AudioContextType {
@@ -12,17 +12,10 @@ const AudioContext = createContext<AudioContextType | undefined>(undefined)
 
 export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const soundEffectsEnabled = usePortfolioStore((state) => state.soundEffectsEnabled)
-  
-  const ctxRef = useRef<AudioContext | null>(null)
-  const masterGainRef = useRef<GainNode | null>(null)
-
-  // Initialize Web Audio Context on first interaction
-  const initAudio = () => {
-    return null
-  }
 
   // Play micro sound effects
-  const playBeep = (freq = 800, type: OscillatorType = 'sine', duration = 0.05) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const playBeep = (_freq = 800, _type: OscillatorType = 'sine', _duration = 0.05) => {
     // Sound globally deactivated
   }
 

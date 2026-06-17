@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Github, Linkedin, Twitter, Mail, FileText } from 'lucide-react'
+import { Github, Linkedin, Mail, FileText } from 'lucide-react'
 import { CanvasBackground } from './CanvasBackground'
 import { useAudio } from '../../context/AudioContext'
 

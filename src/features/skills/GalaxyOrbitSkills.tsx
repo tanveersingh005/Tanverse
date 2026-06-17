@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useAudio } from '../../context/AudioContext'
 import { useTheme } from '../../context/ThemeContext'
 import { 
@@ -7,12 +7,7 @@ import {
   Wrench, 
   Sparkles, 
   GraduationCap,
-  Activity,
-  Cpu,
-  Shield,
-  Gauge,
-  Radio,
-  Terminal
+  Gauge
 } from 'lucide-react'
 
 interface SkillItem {
@@ -61,11 +56,9 @@ function CircularProgress({ percentage, color, size = 32 }: { percentage: number
 }
 
 export const GalaxyOrbitSkills: React.FC = () => {
-  const { playClick, playSuccess } = useAudio()
-  const { resolvedTheme } = useTheme()
+  const { playSuccess } = useAudio()
+  const { resolvedTheme: _resolvedTheme } = useTheme()
   const [activeCategory, setActiveCategory] = useState<string>('languages')
-
-  const isDark = resolvedTheme === 'dark'
 
 
   const skillCategories: SkillCategory[] = [

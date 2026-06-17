@@ -390,6 +390,7 @@ const AppContent: React.FC = () => {
       }, 100)
       return () => clearTimeout(timer)
     }
+    return undefined
   }, [location.pathname, fromProject, setActiveSection])
 
   // IntersectionObserver Scroll-Spy to automatically highlight active navbar tab on scroll and on load

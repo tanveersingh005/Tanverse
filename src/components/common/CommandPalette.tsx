@@ -18,7 +18,6 @@ export const CommandPalette: React.FC = () => {
   const open = usePortfolioStore((state) => state.commandPaletteOpen)
   const setOpen = usePortfolioStore((state) => state.setCommandPaletteOpen)
   const setActiveSection = usePortfolioStore((state) => state.setActiveSection)
-  const setAccentHue = usePortfolioStore((state) => state.setAccentHue)
   
   const customCursor = usePortfolioStore((state) => state.customCursorEnabled)
   const setCustomCursor = usePortfolioStore((state) => state.setCustomCursorEnabled)

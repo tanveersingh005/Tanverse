@@ -28,7 +28,7 @@ interface AchievementCardProps {
   index: number
 }
 
-const AchievementCard: React.FC<AchievementCardProps> = ({ achievement, index }) => {
+const AchievementCard: React.FC<AchievementCardProps> = ({ achievement }) => {
   const config = categoryConfig[achievement.category] || { color: '#6366f1', icon: <Award size={14} /> }
   const color = config.color
   
