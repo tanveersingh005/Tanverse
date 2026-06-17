@@ -2,13 +2,6 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Compass,
-  Briefcase,
-  Milestone,
-  Cpu,
-  User,
-  Mail,
-  FileText,
-  Award,
 } from "lucide-react";
 import { useAudio } from "../../context/AudioContext";
 
@@ -123,21 +116,6 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
 
   const navItems = [
     { label: "Start Journey", target: "home", icon: <Compass size={14} /> },
-    { label: "About", target: "about", icon: <User size={14} /> },
-    { label: "Projects", target: "projects", icon: <Briefcase size={14} /> },
-    {
-      label: "Experience",
-      target: "experience",
-      icon: <Milestone size={14} />,
-    },
-    { label: "Skills", target: "skills", icon: <Cpu size={14} /> },
-    {
-      label: "Achievements",
-      target: "achievements",
-      icon: <Award size={14} />,
-    },
-    { label: "Contact", target: "contact", icon: <Mail size={14} /> },
-    { label: "Resume", target: "resume", icon: <FileText size={14} /> },
   ];
 
   return (
