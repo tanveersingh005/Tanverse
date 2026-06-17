@@ -264,17 +264,17 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
         className="absolute left-1/2 top-[46%] h-px w-[72vw] -translate-x-1/2 pointer-events-none z-0 blur-[1px]"
       />
 
-      {/* Phase label */}
+      {/* Phase label - positioned so it doesn't overlap title on mobile */}
       <motion.div
         key={activePhase.label}
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: isTransitioning ? 0 : 0.36, y: 0 }}
         exit={{ opacity: 0, y: -8 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="absolute right-8 top-8 z-10 pointer-events-none select-none"
+        className="absolute right-4 sm:right-8 top-4 sm:top-8 z-10 pointer-events-none select-none"
       >
         <span
-          className="text-[10px] uppercase tracking-[0.42em] font-display"
+          className="text-[9px] sm:text-[10px] uppercase tracking-[0.32em] sm:tracking-[0.42em] font-display"
           style={{ color: activePhase.titleTint }}
         >
           {activePhase.label}
@@ -344,10 +344,10 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
             y: isTransitioning ? -20 : 0,
           }}
           transition={{ delay: 0.3, duration: 1.0 }}
-          className="z-10 mt-4 text-center select-none pointer-events-none"
+          className="z-10 mt-2 sm:mt-4 w-full text-center select-none pointer-events-none px-4"
         >
           <span
-            className="text-[20px] font-light font-sans tracking-[0.45em] uppercase transition-colors duration-1000"
+            className="text-[15px] sm:text-[20px] font-light font-sans tracking-[0.35em] sm:tracking-[0.45em] uppercase transition-colors duration-1000"
             style={{ color: activePhase.titleTint }}
           >
             Tanveer Singh's
@@ -365,13 +365,13 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
                 scale: isTransitioning ? 0.85 : 1,
               }}
               transition={{ delay: 0.6, duration: 2.0 }}
-              className="w-full max-w-[1560px] px-[3vw] flex items-center justify-center gap-[6vw]"
+              className="w-full max-w-[1560px] px-[3vw] flex items-center justify-center gap-[4vw] sm:gap-[6vw]"
               aria-hidden="true"
             >
               {["PORT", "FOLIO"].map((word) => (
                 <span
                   key={word}
-                  className="font-['Antonio'] text-[clamp(6rem,20vw,19rem)] font-black leading-[0.79] uppercase text-center tracking-[0.1em]"
+                  className="font-['Antonio'] text-[clamp(3.5rem,18vw,19rem)] font-black leading-[0.79] uppercase text-center tracking-[0.08em] sm:tracking-[0.1em]"
                   style={{
                     color: activePhase.titleTint,
                     opacity: 0.12,
@@ -399,7 +399,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
               stiffness: 70,
               damping: 15,
             }}
-            className="relative z-10 flex items-center justify-center h-[65vh] max-h-[580px]"
+            className="relative z-10 flex items-center justify-center h-[52vh] sm:h-[65vh] max-h-[480px] sm:max-h-[580px]"
           >
             {/* Centered avatar remains still after the entrance animation */}
             <motion.div
@@ -431,10 +431,10 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
             y: isTransitioning ? 50 : 0,
           }}
           transition={{ delay: 1.7, duration: 0.8 }}
-          className="z-20 w-full max-w-5xl px-4 mb-4"
+          className="z-20 w-full max-w-5xl px-3 sm:px-4 mb-2 sm:mb-4"
         >
           <div className="relative">
-            <div className="relative w-full glassmorphism bg-slate-950/15 backdrop-blur-xl border border-white/10 rounded-full p-2 md:p-2.5 flex flex-row items-center justify-start md:justify-center gap-1.5 md:gap-2.5 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] overflow-x-auto scrollbar-none">
+            <div className="relative w-full glassmorphism bg-slate-950/15 backdrop-blur-xl border border-white/10 rounded-full p-1.5 sm:p-2 md:p-2.5 flex flex-row items-center justify-start md:justify-center gap-1 sm:gap-1.5 md:gap-2.5 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] overflow-x-auto scrollbar-none">
               {navItems.map((item, idx) => {
                 const isPrimary = item.target === "home";
                 return (
@@ -444,8 +444,8 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
                     onMouseEnter={() => playClick()}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className={`flex items-center gap-1.5 md:gap-2
-    px-2.5 py-1.5 md:px-3.5 md:py-2.5
+                    className={`flex items-center gap-1 sm:gap-1.5 md:gap-2
+    px-2 py-1.5 sm:px-2.5 sm:py-1.5 md:px-3.5 md:py-2.5
     rounded-full
     cursor-pointer
     whitespace-nowrap
@@ -462,7 +462,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
                     <span
                       className={
                         isPrimary
-                          ? "inline text-xs font-bold tracking-wide"
+                          ? "inline text-[11px] sm:text-xs font-bold tracking-wide"
                           : "hidden lg:inline text-xs font-medium tracking-wide"
                       }
                     >
