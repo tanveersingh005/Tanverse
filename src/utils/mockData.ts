@@ -162,7 +162,7 @@ export const projectsData: Project[] = [
     category: 'Frontend',
     image: '/portfolio_banner.png',
     github: 'https://github.com/tanveersingh005/Tanverse',
-    demo: 'https://tanveer-singh.netlify.app/',
+    demo: 'https://tanverse.netlify.app/',
     timeline: '1 Month (2026)',
     metrics: [
       { label: 'Interactive Framerate', value: '120 FPS' },
