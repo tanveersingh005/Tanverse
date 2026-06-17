@@ -55,8 +55,11 @@ export const ContactForm: React.FC = () => {
 
     try {
       const templateParams = {
+        name: data.name,
         from_name: data.name,
+        email: data.email,
         from_email: data.email,
+        reply_to: data.email,
         subject: data.subject,
         message: data.message
       }
@@ -224,7 +227,7 @@ export const ContactForm: React.FC = () => {
                 <div>
                   <div className="text-xs font-bold text-slate-100">Transmission Signal Error</div>
                   <p className="text-[10px] text-slate-400 leading-relaxed mt-0.5">
-                    There was an issue processing EmailJS. Please contact direct email contact@engineer.io.
+                    There was an issue processing EmailJS. Please contact direct email tanveercloud005@gmail.com.
                   </p>
                 </div>
               </div>
