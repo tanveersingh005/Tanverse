@@ -9,6 +9,24 @@
     <title>Tanverse &bull;Portfolio Website</title>
     <meta name="description" content="Portfolio of a world-class Full Stack Software Engineer specializing in interactive 3D Graphics and premium user experiences." />
     
+    <!-- Google Analytics -->
+    <script>
+      (function() {
+        const gaId = "%VITE_GA_MEASUREMENT_ID%";
+        if (gaId && gaId.startsWith("G-") && !gaId.includes("%")) {
+          const script = document.createElement("script");
+          script.async = true;
+          script.src = "https://www.googletagmanager.com/gtag/js?id=" + gaId;
+          document.head.appendChild(script);
+
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function() { dataLayer.push(arguments); };
+          gtag('js', new Date());
+          gtag('config', gaId);
+        }
+      })();
+    </script>
+
     <!-- OpenGraph Tags -->
     <meta property="og:title" content="Tanverse | Elite Engineering Portfolio" />
     <meta property="og:description" content="Discover premium applications, interactive WebGL visualizers, and state-of-the-art developer engineering." />
