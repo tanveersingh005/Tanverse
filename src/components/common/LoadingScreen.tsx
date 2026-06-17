@@ -434,7 +434,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
           className="z-20 w-full max-w-5xl px-3 sm:px-4 mb-2 sm:mb-4"
         >
           <div className="relative">
-            <div className="relative w-full glassmorphism bg-slate-950/15 backdrop-blur-xl border border-white/10 rounded-2xl md:rounded-full p-2 md:p-2.5 grid grid-cols-2 md:flex md:flex-row md:items-center md:justify-center gap-1.5 sm:gap-2 md:gap-2.5 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] overflow-visible">
+            <div className="relative w-max mx-auto glassmorphism bg-slate-950/15 backdrop-blur-xl border border-white/10 rounded-full p-1.5 sm:p-2 flex flex-row items-center justify-center gap-1.5 sm:gap-2 md:gap-2.5 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] overflow-visible">
               {navItems.map((item, idx) => {
                 const isPrimary = item.target === "home";
                 return (
@@ -445,8 +445,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     className={`flex items-center justify-center gap-1.5 sm:gap-2
-    w-full md:w-auto
-    px-2.5 py-2 sm:px-3 sm:py-2 md:px-3.5 md:py-2.5
+    px-3 py-1.5 sm:px-4 sm:py-2 md:px-3.5 md:py-2.5
     rounded-full
     cursor-pointer
     whitespace-nowrap
@@ -454,8 +453,8 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
     focus:outline-none
     ${
       isPrimary
-        ? "bg-[#eae6df] text-[#0d212a] shadow-sm"
-        : "bg-white/5 md:bg-transparent text-[#bfbfbf] hover:bg-[#1b1b1b] hover:text-[#ffffff] border border-white/5 md:border-transparent"
+        ? "bg-[#eae6df] text-[#0d212a] shadow-sm flex"
+        : "hidden md:flex bg-transparent text-[#bfbfbf] hover:bg-[#1b1b1b] hover:text-[#ffffff] border border-transparent"
     }`}
                   >
                     <span className="flex-shrink-0">{item.icon}</span>
@@ -464,7 +463,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
                       className={
                         isPrimary
                           ? "inline text-[11px] sm:text-xs font-bold tracking-wide"
-                          : "inline md:hidden lg:inline text-[11px] sm:text-xs font-medium tracking-wide"
+                          : "hidden lg:inline text-xs font-medium tracking-wide"
                       }
                     >
                       {item.label}
