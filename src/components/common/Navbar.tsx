@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Menu, X, Command } from 'lucide-react'
+import { Menu, X, Command, Sun, Moon, Volume2, VolumeX } from 'lucide-react'
 import { usePortfolioStore } from '../../store/usePortfolioStore'
 import { MusicPlayer } from './MusicPlayer'
 import { ThemeToggle } from './ThemeToggle'
 import { useAudio } from '../../context/AudioContext'
+import { useTheme } from '../../context/ThemeContext'
 
 const navItems = [
   { id: 'home', label: 'Start Journey' },
@@ -19,12 +20,16 @@ const navItems = [
 export const Navbar: React.FC = () => {
   const activeSection = usePortfolioStore((state) => state.activeSection)
   const setActiveSection = usePortfolioStore((state) => state.setActiveSection)
-  
   const setCommandPaletteOpen = usePortfolioStore((state) => state.setCommandPaletteOpen)
+  const soundEffectsEnabled = usePortfolioStore((state) => state.soundEffectsEnabled)
+  const setSoundEffectsEnabled = usePortfolioStore((state) => state.setSoundEffectsEnabled)
   const { playClick } = useAudio()
+  const { resolvedTheme, setTheme } = useTheme()
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+
+  const isDark = resolvedTheme === 'dark'
 
   // Track scrolling to add glass effect shadow
   useEffect(() => {
@@ -102,54 +107,108 @@ export const Navbar: React.FC = () => {
           })}
         </div>
 
-        {/* Utilities */}
+        {/* Desktop Utilities */}
         <div className="hidden lg:flex items-center gap-3 xl:gap-6 2xl:gap-10">
-          {/* Theme Switcher Toggle */}
           <ThemeToggle />
-
-          {/* Music player controls */}
           <MusicPlayer />
         </div>
 
-        {/* Mobile controls */}
-        <div className="flex items-center gap-6 lg:hidden">
-          <ThemeToggle />
-          <MusicPlayer />
-
+        {/* Mobile: only hamburger button */}
+        <div className="flex items-center lg:hidden">
           <button
             onClick={() => { playClick(); setMobileMenuOpen(!mobileMenuOpen); }}
-            className="p-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-200 dark:hover:bg-white/5 rounded-md cursor-pointer"
+            className="p-2 text-slate-300 hover:text-slate-100 hover:bg-white/5 rounded-lg cursor-pointer transition-colors"
             data-cursor="MENU"
           >
-            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
 
       {/* Mobile Drawer menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden absolute top-full left-0 right-0 glassmorphism border-b border-white/5 py-6 px-6 shadow-2xl flex flex-col gap-3 animate-fade-in bg-[#0c0c10]/95">
+        <div className="lg:hidden absolute top-full left-0 right-0 glassmorphism border-b border-white/5 py-5 px-5 shadow-2xl flex flex-col gap-2 animate-fade-in bg-[#0c0c10]/95">
+          {/* Nav links */}
           {navItems.map((item) => {
             const isActive = activeSection === item.id
             return (
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`py-2 px-4 rounded-lg text-left text-sm font-semibold transition-all ${
+                className={`py-2.5 px-4 rounded-lg text-left text-sm font-semibold transition-all ${
                   isActive 
-                    ? 'text-accent-600 dark:text-white bg-accent-600/10 dark:bg-accent-600/20 border-l-2 border-accent-500' 
-                    : 'text-slate-400 hover:text-slate-200'
+                    ? 'text-accent-400 bg-accent-600/10 border-l-2 border-accent-500' 
+                    : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
                 }`}
               >
                 {item.label}
               </button>
             )
           })}
-          
-          <div className="border-t border-white/5 pt-4 mt-2">
+
+          {/* Settings divider */}
+          <div className="border-t border-white/8 mt-2 pt-4 flex flex-col gap-2">
+
+            {/* Theme toggle row */}
+            <button
+              onClick={() => { playClick(); setTheme(isDark ? 'light' : 'dark') }}
+              className="flex items-center justify-between w-full px-4 py-3 rounded-xl bg-slate-900/40 border border-white/5 hover:border-white/10 transition-all cursor-pointer group"
+            >
+              <div className="flex items-center gap-3">
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                  isDark ? 'bg-cyan-500/10 text-cyan-400' : 'bg-amber-500/10 text-amber-400'
+                }`}>
+                  {isDark ? <Moon size={15} /> : <Sun size={15} />}
+                </div>
+                <div className="text-left">
+                  <p className="text-xs font-semibold text-slate-200">Appearance</p>
+                  <p className="text-[10px] text-slate-500">{isDark ? 'Dark Mode' : 'Light Mode'}</p>
+                </div>
+              </div>
+              {/* Toggle pill */}
+              <div className={`relative w-11 h-6 rounded-full border transition-colors duration-300 ${
+                isDark ? 'bg-cyan-500/20 border-cyan-500/30' : 'bg-amber-500/20 border-amber-500/30'
+              }`}>
+                <span className={`absolute top-0.5 w-5 h-5 rounded-full shadow-md transition-all duration-300 ${
+                  isDark 
+                    ? 'left-5 bg-cyan-400 shadow-cyan-500/40' 
+                    : 'left-0.5 bg-amber-400 shadow-amber-500/40'
+                }`} />
+              </div>
+            </button>
+
+            {/* Sound toggle row */}
+            <button
+              onClick={() => { playClick(); setSoundEffectsEnabled(!soundEffectsEnabled) }}
+              className="flex items-center justify-between w-full px-4 py-3 rounded-xl bg-slate-900/40 border border-white/5 hover:border-white/10 transition-all cursor-pointer group"
+            >
+              <div className="flex items-center gap-3">
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                  soundEffectsEnabled ? 'bg-accent-500/10 text-accent-400' : 'bg-slate-500/10 text-slate-500'
+                }`}>
+                  {soundEffectsEnabled ? <Volume2 size={15} /> : <VolumeX size={15} />}
+                </div>
+                <div className="text-left">
+                  <p className="text-xs font-semibold text-slate-200">Sound Effects</p>
+                  <p className="text-[10px] text-slate-500">{soundEffectsEnabled ? 'Enabled' : 'Muted'}</p>
+                </div>
+              </div>
+              {/* Toggle pill */}
+              <div className={`relative w-11 h-6 rounded-full border transition-colors duration-300 ${
+                soundEffectsEnabled ? 'bg-accent-500/20 border-accent-500/30' : 'bg-slate-700/40 border-slate-600/30'
+              }`}>
+                <span className={`absolute top-0.5 w-5 h-5 rounded-full shadow-md transition-all duration-300 ${
+                  soundEffectsEnabled 
+                    ? 'left-5 bg-accent-400 shadow-accent-500/40' 
+                    : 'left-0.5 bg-slate-500'
+                }`} />
+              </div>
+            </button>
+
+            {/* Command palette */}
             <button
               onClick={() => { playClick(); setMobileMenuOpen(false); setCommandPaletteOpen(true); }}
-              className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg border border-white/5 text-xs text-slate-300 font-semibold"
+              className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl border border-white/5 hover:border-white/10 text-xs text-slate-300 font-semibold hover:bg-white/5 transition-all"
             >
               <Command size={14} /> Command Menu
             </button>
